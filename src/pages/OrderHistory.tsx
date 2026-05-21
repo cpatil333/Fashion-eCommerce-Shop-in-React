@@ -7,7 +7,6 @@ import { formatDate } from "../utils/formatDate";
 export const loader = async () => {
   try {
     const response = await customFetch.get("/orders");
-    
     return response.data;
   } catch (error) {
     console.error("Failed to fetch orders:", error);
@@ -17,6 +16,7 @@ export const loader = async () => {
 
 const OrderHistory = () => {
   const [user] = useState(JSON.parse(localStorage.getItem("user") || "{}"));
+  //console.log(user)
   const orders = useLoaderData() as Order[];
   
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ const OrderHistory = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => order?.user && order.user.id === user.id && (
+            {orders.map((order) => order?.user && Number(order.user.id) === Number(user.id) && (
               <tr key={order.id}>
                 <td className="py-3 px-4 border-b text-center">{order.id}</td>
                 <td className="py-3 px-4 border-b text-center">{ formatDate(order.orderDate) }</td>

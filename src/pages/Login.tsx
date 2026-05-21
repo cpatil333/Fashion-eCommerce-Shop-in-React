@@ -15,6 +15,7 @@ const Login = () => {
     // Get form data
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
+    console.log(data);
     // Check if form data is valid
     if (!checkLoginFormData(data)) return;
     
